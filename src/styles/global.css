@@ -1,0 +1,448 @@
+/* src/styles/global.css */
+
+/* 1. CSS Reset Básico */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Definición de la Paleta de Colores (Variables CSS) */
+:root {
+  --color-background: #0d0d0d; /* Un negro no tan puro, más orgánico */
+  --color-text: #cccccc;      /* Un gris claro para el texto principal */
+  --color-title: #f5f5dc;     /* Blanco hueso para títulos importantes */
+  --color-accent: #880808;      /* Rojo sangre para detalles y enlaces */
+  --color-accent-hover: #b40a0a;/* Un rojo más brillante para interacción */
+  --color-special: #4e2a84;
+  --font-title: 'Cinzel Decorative', serif;
+  --font-body: 'Lora', serif;
+}
+
+/* El cursor por defecto para toda la página */
+html {
+  /* Si gNormal.ani no carga, el navegador usará su cursor por defecto (auto) */
+  cursor: url('/cursors/gNormal.ani'), auto; 
+}
+
+/* El cursor para elementos 'puntero' (enlaces, botones, etc.) */
+a, button, input[type="submit"], input[type="checkbox"], input[type="radio"], [role="button"] {
+  cursor: url('/cursors/gSelect.ani'), pointer;
+}
+
+/* El cursor para selección de texto */
+input[type="text"], textarea, [contenteditable="true"] {
+  cursor: url('/cursors/gTextSelect.ani'), text;
+}
+
+/* 3. Estilos Globales del Body */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden; /* Evita el scroll horizontal */
+  background-image: url('/images/background.jpg'); /* <-- USA TU IMAGEN */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* 4. Estilos para Títulos y Párrafos */
+h1, h2 {
+  transition: text-shadow 0.3s ease;
+}
+
+h2:hover {
+  text-shadow: 0 0 10px var(--color-title), 0 0 20px var(--color-special);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+.seccion-hero, .seccion-contenido {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Cada sección ocupa al menos toda la pantalla */
+  position: relative;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+/* Añadimos una capa oscura sobre el fondo para mejorar la legibilidad del texto */
+.seccion-hero::before, .seccion-contenido::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Capa negra con 60% de opacidad */
+  z-index: 1;
+}
+
+/* Contenedor para el contenido */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative; /* Para que el contenido esté sobre la capa oscura */
+  z-index: 2;
+}
+
+/* Estilos específicos para la portada */
+.seccion-hero .subtitulo {
+  font-size: 1.5rem;
+  color: var(--color-text);
+  font-style: italic;
+}
+
+.scroll-down-indicator {
+  margin-top: 3rem;
+  font-size: 3rem;
+  animation: bounce 2s infinite;
+}
+
+/* Animación para el indicador de scroll */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 8. Estilos de la Línea de Tiempo */
+.timeline-container {
+  position: relative;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+/* La línea central de la historia */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background-color: var(--color-accent);
+  opacity: 0.3;
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  margin-bottom: 2rem;
+  padding: 0 2.5rem;
+}
+
+/* Alternamos los items */
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+/* El nodo/círculo en la línea central */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-background);
+  border: 3px solid var(--color-special);
+  border-radius: 50%;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.timeline-item:nth-child(odd)::after {
+  right: -8px; /* Mitad del ancho del círculo para centrarlo */
+}
+
+.timeline-item:nth-child(even)::after {
+  left: -8px; /* Mitad del ancho del círculo para centrarlo */
+}
+
+.timeline-item:hover::after {
+  transform: scale(1.2);
+}
+
+.timeline-content {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+.timeline-date {
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+  margin: 0 0 0.5rem 0;
+}
+
+.timeline-description {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* 9. Estilos de la Galería de Momentos */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.photo-frame {
+  position: relative;
+  background-color: #1a1a1a; /* Color de fondo del marco */
+  border: 10px solid #111;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(0,0,0,0.5);
+  overflow: hidden; /* Oculta lo que se salga del marco */
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  border-image: url("/images/marco.png") 30 round; /* Necesitarás una imagen para esto */
+}
+
+.photo-frame:hover {
+  transform: scale(1.05) rotate(1deg); /* Efecto de "levantarse" */
+  box-shadow: 0 15px 30px rgba(136, 8, 8, 0.5), inset 0 0 15px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(100%); /* El recuerdo casi en blanco y negro */
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.photo-frame:hover img {
+  filter: grayscale(0%); /* El recuerdo cobra vida a todo color */
+  transform: scale(1.1);
+}
+
+
+
+.photo-caption {
+  position: absolute;
+  bottom: 15px; /* Alineado con el padding */
+  left: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: var(--color-title);
+  padding: 0.5rem;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0; /* Oculto por defecto */
+  transform: translateY(100%);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.photo-frame:hover .photo-caption {
+  opacity: 1; /* Aparece al hacer hover */
+  transform: translateY(0);
+}
+
+.seccion-contenido h2::before {
+  content: '🥀'; /* Emoticono de rosa marchita */
+  display: inline-block;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  opacity: 0.5;
+}
+
+/* 10. Estilos de la Banda Sonora */
+.soundtrack-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+.soundtrack-intro {
+  font-style: italic;
+  max-width: 600px; /* Para que no sea demasiado ancho en pantallas grandes */
+}
+
+.spotify-embed-wrapper {
+  width: 100%;
+  max-width: 700px;
+  border: 5px solid #111;
+  border-radius: 15px; /* Un poco más que el borde del iframe */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+.spotify-embed-wrapper iframe {
+  display: block; 
+}
+
+/* 11. Estilos del Mensaje Sellado */
+.sealed-container {
+  text-align: center;
+}
+
+.wax-seal {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 4px solid #a10a0a;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin: 2rem auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1a1a1a;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  filter: grayscale(70%);
+}
+
+.wax-seal:hover {
+  transform: scale(1.1);
+  background-color: rgba(136, 8, 8, 0.5);
+  box-shadow: 0 8px 25px rgba(136, 8, 8, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.3);
+  filter: grayscale(0%);
+}
+
+.wax-seal img {
+  /* Aquí puedes ajustar el color si el original no es el que quieres */
+  filter: hue-rotate(330deg) saturate(1.5) brightness(0.8); 
+  /* Prueba con diferentes valores de hue-rotate y saturate para obtener el rojo deseado */
+}
+
+.letter {
+  background-color: #f5f5dc; /* Blanco hueso (pergamino) */
+  color: #1a1a1a; /* Texto oscuro para legibilidad */
+  padding: 3rem;
+  border: 1px solid #d3c5aa;
+  border-radius: 5px;
+  max-width: 700px;
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+
+  /* Animación de entrada */
+  animation: fadeInLetter 1s ease-out forwards;
+}
+
+.letter h3 {
+  font-family: var(--font-title);
+  color: #333;
+}
+
+.letter p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.letter .signature {
+  text-align: right;
+  font-style: italic;
+  margin-top: 2rem;
+}
+
+@keyframes fadeInLetter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 13. Estilos de la Pantalla de Carga */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease-out;
+}
+
+.loading-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none; /* Para que no se pueda interactuar mientras desaparece */
+}
+
+.loading-heartagram {
+  width: 150px;
+  height: 150px;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px var(--color-accent));
+  }
+  50% {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 15px var(--color-accent-hover));
+  }
+}
+
+.scroll-to-music-btn {
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 1rem 2rem;
+  font-family: var(--font-title);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+}
+
+.scroll-to-music-btn:hover {
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  box-shadow: 0 0 15px var(--color-accent-hover);
+}
