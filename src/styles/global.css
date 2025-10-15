@@ -352,15 +352,22 @@ a:hover {
 
 .letter {
   background-color: #f5f5dc; /* Blanco hueso (pergamino) */
+  background-image: url('/images/paper-texture.jpg');
   color: #1a1a1a; /* Texto oscuro para legibilidad */
   padding: 3rem;
   border: 1px solid #d3c5aa;
-  border-radius: 5px;
+  border-radius: 3px;
   max-width: 700px;
   text-align: left;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  position: relative; /* Necesario para la sombra */
 
-  /* Animación de entrada */
+  /* Sombra multicapa para un efecto más realista de papel levantado */
+  box-shadow:
+    0 1px 1px rgba(0,0,0,0.15),
+    0 2px 2px rgba(0,0,0,0.15),
+    0 4px 4px rgba(0,0,0,0.15),
+    0 8px 8px rgba(0,0,0,0.15);
+
   animation: fadeInLetter 1s ease-out forwards;
 }
 
@@ -378,8 +385,10 @@ a:hover {
 
 .letter .signature {
   text-align: right;
-  font-style: italic;
   margin-top: 2rem;
+  font-family: 'Dancing Script', cursive; /* Aplicamos la fuente manuscrita */
+  font-size: 2rem; /* La hacemos más grande y destacada */
+  color: #5c0c0c; /* Un color vino oscuro para la firma */
 }
 
 @keyframes fadeInLetter {
@@ -405,12 +414,24 @@ a:hover {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  transition: opacity 1s ease-out;
 }
 
 .loading-overlay.fade-out {
-  opacity: 0;
+  animation: dissolve 1s ease-out forwards;
   pointer-events: none; /* Para que no se pueda interactuar mientras desaparece */
+}
+
+/* El nuevo keyframe que crea el efecto de disolución */
+@keyframes dissolve {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(1.1); /* Hacemos que crezca un poco al disolverse */
+  }
 }
 
 .loading-heartagram {
@@ -479,4 +500,27 @@ a:hover {
   .timeline-item:nth-child(odd)::after {
     right: auto;
   }
+}
+
+.typewriter {
+  display: inline-block; /* Necesario para que el ancho funcione bien */
+  overflow: hidden; /* Oculta el texto que aún no se ha "escrito" */
+  white-space: nowrap; /* Evita que el texto salte a la siguiente línea */
+  border-right: 3px solid var(--color-accent); /* Simula el cursor de escritura */
+  width: 0; /* Empieza sin ancho */
+  animation:
+    typing 7.5s steps(30, end) forwards, /* 30 es el número de caracteres */
+    blink-caret .75s step-end infinite;
+}
+
+/* Animación de escritura */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* Animación del cursor parpadeante */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--color-accent); }
 }
