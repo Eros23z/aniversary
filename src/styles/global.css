@@ -446,3 +446,37 @@ a:hover {
   color: var(--color-background);
   box-shadow: 0 0 15px var(--color-accent-hover);
 }
+
+/* 14. Media Query para Responsividad de la Línea de Tiempo */
+@media (max-width: 768px) {
+  
+  /* Movemos la línea central del timeline hacia la izquierda */
+  .timeline-container::before {
+    left: 15px; /* La separamos un poco del borde */
+  }
+
+  /* Hacemos que cada "item" ocupe todo el ancho disponible */
+  .timeline-item {
+    width: 100%;
+    padding-left: 50px; /* Dejamos espacio para la línea y el nodo */
+    padding-right: 15px; /* Un poco de espacio a la derecha */
+    margin-bottom: 2.5rem; /* Aumentamos la separación vertical */
+  }
+
+  /* Reseteamos la posición de TODOS los items para que se alineen a la izquierda */
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    left: 0;
+    text-align: left; /* Muy importante: alineamos todo el texto a la izquierda */
+  }
+
+  /* Movemos el nodo (el círculo) para que coincida con la nueva posición de la línea */
+  .timeline-item::after {
+    left: 8px; /* 15px (posición de la línea) - 7px (mitad del ancho del nodo) */
+  }
+  
+  /* Ya no necesitamos la posición 'right' para los items impares */
+  .timeline-item:nth-child(odd)::after {
+    right: auto;
+  }
+}
