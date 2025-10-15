@@ -2,27 +2,27 @@
 export const photos = [
   {
     src: "/images/gallery/recuerdo1.jpg", // La ruta desde la carpeta 'public'
-    caption: "Aquel concierto inolvidable"
+    caption: "Nuestra primer foto juntos"
   },
   {
-    src: "/images/gallery/recuerdo2.jpg",
+    src: "/images/gallery/Primer viaje.jpg",
     caption: "Nuestro primer viaje juntos"
   },
   {
-    src: "/images/gallery/recuerdo3.jpg",
+    src: "/images/gallery/Tarde cualquiera.jpg",
     caption: "Una tarde cualquiera, perfecta"
   },
   {
-    src: "/images/gallery/recuerdo4.jpg",
-    caption: "Celebrando tu cumpleaños"
+    src: "/images/gallery/Feriando.jpg",
+    caption: "Feriando(?"
   },
   {
-    src: "/images/gallery/recuerdo5.jpg",
-    caption: "La locura de aquel día"
+    src: "/images/gallery/concierto.jpg",
+    caption: "Aquel toque inolvidable"
   },
   {
-    src: "/images/gallery/recuerdo6.jpg",
-    caption: "Mirando al futuro, juntos."
+    src: "/images/gallery/Amor.jpg",
+    caption: "Nuestras manos en unión."
   },
   // Añade tantas fotos como quieras (entre 6 y 9)
 ];
