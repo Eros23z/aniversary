@@ -409,8 +409,6 @@ a:hover {
   left: 0;
   right: 0;  /* <-- CLAVE: Ancla al borde derecho */
   bottom: 0;
-  width: 100vw;
-  height: 100vh;
   background-color: var(--color-background);
   display: flex;
   justify-content: center;
